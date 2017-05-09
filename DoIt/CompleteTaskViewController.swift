@@ -12,6 +12,7 @@ class CompleteTaskViewController: UIViewController {
     
     @IBOutlet weak var taskLabel: UILabel!
     
+    let taskDefault : String? = ""
     var task = Task()
     var previousVC = TasksViewController()
 
@@ -21,7 +22,7 @@ class CompleteTaskViewController: UIViewController {
         taskLabel.text = task.name
         
         if task.important == true {
-            taskLabel.text = "❗️\(task.name)"
+            taskLabel.text = "❗️\(task.name))"
         } else {
             taskLabel.text = task.name
         }
