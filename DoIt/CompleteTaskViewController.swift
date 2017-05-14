@@ -10,11 +10,11 @@ import UIKit
 
 class CompleteTaskViewController: UIViewController {
     
-    @IBOutlet weak var taskLabel: UILabel!
+    @IBOutlet weak var taskLabel: UILabel! 
     
     let taskDefault : String? = ""
     var task : Task? = nil
-    var previousVC = TasksViewController()
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +24,7 @@ class CompleteTaskViewController: UIViewController {
         } else {
             taskLabel.text = task?.name
         }
+       
 
 
         // Do any additional setup after loading the view.

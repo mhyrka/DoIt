@@ -14,7 +14,6 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     var tasks : [Task] = []
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -46,7 +45,6 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         let task = tasks[indexPath.row]
         performSegue(withIdentifier: "selectTaskSegue", sender: task)
     }
@@ -69,15 +67,12 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     
     func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "addSegue" {
-            
-        }
+        
         if segue.identifier == "selectTaskSegue"{
             let nextVC = segue.destination as! CompleteTaskViewController
             nextVC.task = sender as? Task
-            
             }
-
+        }
     }
 }
-}
+
