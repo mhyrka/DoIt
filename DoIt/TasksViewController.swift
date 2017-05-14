@@ -14,7 +14,6 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     var tasks : [Task] = []
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -41,21 +40,19 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
             cell.textLabel?.text = "❗️\(task.name ?? taskOptional)"
         } else {
             cell.textLabel?.text = task.name!
-            }
+        }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         let task = tasks[indexPath.row]
         performSegue(withIdentifier: "selectTaskSegue", sender: task)
     }
-    
-    
+
     @IBAction func plusTapped(_ sender: Any) {
         performSegue(withIdentifier: "addSegue", sender: nil)
     }
-    
+
     func getTasks() {
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         do {
@@ -64,20 +61,15 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
             } catch {
                 print("There's an error")
         }
-                
-            
-    
-    
-    func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "addSegue" {
             
         }
         if segue.identifier == "selectTaskSegue"{
             let nextVC = segue.destination as! CompleteTaskViewController
             nextVC.task = sender as? Task
-            
-            }
-
+        }
     }
-}
 }
