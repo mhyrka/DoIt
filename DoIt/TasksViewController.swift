@@ -40,7 +40,7 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
             cell.textLabel?.text = "❗️\(task.name ?? taskOptional)"
         } else {
             cell.textLabel?.text = task.name!
-            }
+        }
         return cell
     }
     
@@ -48,12 +48,11 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let task = tasks[indexPath.row]
         performSegue(withIdentifier: "selectTaskSegue", sender: task)
     }
-    
-    
+
     @IBAction func plusTapped(_ sender: Any) {
         performSegue(withIdentifier: "addSegue", sender: nil)
     }
-    
+
     func getTasks() {
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         do {
@@ -62,6 +61,7 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
             } catch {
                 print("There's an error")
         }
+
                 
             
     
@@ -75,4 +75,18 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
     }
 }
+
+
+    
+
+    func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "addSegue" {
+            
+        }
+        if segue.identifier == "selectTaskSegue"{
+            let nextVC = segue.destination as! CompleteTaskViewController
+            nextVC.task = sender as? Task
+        }
+    }
+
 
