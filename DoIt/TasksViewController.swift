@@ -13,7 +13,7 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @IBOutlet weak var tableView: UITableView!
     
     var tasks : [Task] = []
-    var selectedIndex = 0
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +22,11 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
         tableView.delegate = self
         // Do any additional setup after loading the view, typically from a nib.
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        getTasks()
+        tableView.reloadData()
+    } // gets called every time view controller is about to show up on screen
 
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -35,13 +40,13 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
         if task.important == true {
             cell.textLabel?.text = "❗️\(task.name ?? taskOptional)"
         } else {
-            cell.textLabel?.text = task.name
+            cell.textLabel?.text = task.name!
             }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedIndex = indexPath.row
+        
         let task = tasks[indexPath.row]
         performSegue(withIdentifier: "selectTaskSegue", sender: task)
     }
@@ -49,20 +54,30 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     @IBAction func plusTapped(_ sender: Any) {
         performSegue(withIdentifier: "addSegue", sender: nil)
-        
-        func getTasks() {
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    func getTasks() {
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        do {
+            tasks = try context.fetch(Task.fetchRequest()) as! [Task]
+            print(tasks)
+            } catch {
+                print("There's an error")
+        }
+                
+            
+    
+    
+    func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "addSegue" {
             
         }
         if segue.identifier == "selectTaskSegue"{
             let nextVC = segue.destination as! CompleteTaskViewController
-            nextVC.task = sender as! Task
-            nextVC.previousVC = self
+            nextVC.task = sender as? Task
+            
             }
 
     }
 }
-
+}
