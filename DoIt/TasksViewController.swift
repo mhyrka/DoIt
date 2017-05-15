@@ -61,12 +61,12 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
             } catch {
                 print("There's an error")
         }
-
+    }
                 
             
     
     
-    func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "selectTaskSegue"{
             let nextVC = segue.destination as! CompleteTaskViewController
@@ -74,10 +74,10 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
             }
         }
     }
-}
 
 
-    
+
+
 
     func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "addSegue" {
